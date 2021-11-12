@@ -1,0 +1,2416 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>The Ryokan - &#128050;dungeons-dragons</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #2f3136;
+            color: #b9bbbe;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #7289da;
+            background-color: rgba(114, 137, 218, .1);
+            font-weight: 500;
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+        }
+
+        .chatlog__author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #2f3136;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(46, 48, 54, 0.3);
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0.1em;
+            padding: 0.2em 0.35em;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/6d8c9e52f949bf45b279e9570d47b2f4-79D26.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">The Ryokan</div>
+        <div class="preamble__entry">══ &#120330;&#120368;&#120366;&#120366;&#120374;&#120367;&#120362;&#120373;&#120378; - 温泉 ══ / &#128050;dungeons-dragons</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 06:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="819351563893735425" id="message-819351563893735425" title="Message sent: 10-Mar-21 06:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Our DM has been gracious enough to start turning our last year of our campaigning into a novel</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819351652661723147" id="message-819351652661723147" title="Message sent: 10-Mar-21 06:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">For all you who missed the D&amp;D corner of the stream, I will post more details leading up to the campaign on Sunday here</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819351673117212742" id="message-819351673117212742" title="Message sent: 10-Mar-21 06:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But for now....</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819351685641142302" id="message-819351685641142302" title="Message sent: 10-Mar-21 06:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Enjoy Chapter 1</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="819351721507291136" id="message-819351721507291136" title="Message sent: 10-Mar-21 06:31 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Kriios_Faithful_Episode_1-30D99.pdf">
+                                        Kriios_Faithful_Episode_1.pdf
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    49.93 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="ShibaYayy">
+                                <img class="emoji emoji--small" alt="ShibaYayy" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/818253481902735410-F4065.png" loading="lazy">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/93db70e199864c28acd1e2746b9e5b63-E0E7E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Cina#0001" data-user-id="148836229067046914" style="color: rgb(104,98,98)">Cina</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 06:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="819354231508959242" id="message-819354231508959242" title="Message sent: 10-Mar-21 06:41 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Giru#3205">@Yuta</span> have you dont any art based on your D&amp;D campaign?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 07:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="819360812912345120" id="message-819360812912345120" title="Message sent: 10-Mar-21 07:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I do I do, I have my character and was going to show them when we introduced characters in here</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/93db70e199864c28acd1e2746b9e5b63-E0E7E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Cina#0001" data-user-id="148836229067046914" style="color: rgb(104,98,98)">Cina</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 07:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="819360944500637727" id="message-819360944500637727" title="Message sent: 10-Mar-21 07:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oooo i cant wait</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819361002349002782" id="message-819361002349002782" title="Message sent: 10-Mar-21 07:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i wonder if your dm would ask you to do cover art or something for the novel</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Mar-21 07:08 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1c29a628733a05bde2e46180afdf0786-9A3A8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Var&#39;uun#6962" data-user-id="164145797867241472" style="color: rgb(243,238,238)">Var&#39;uun</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 09:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="819398048391757825" id="message-819398048391757825" title="Message sent: 10-Mar-21 09:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">what a fabulous idea.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819398105682149437" id="message-819398105682149437" title="Message sent: 10-Mar-21 09:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="Giru#3205">@Yuta</span>  hop too</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Mar-21 09:35 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 09:35 PM</span>
+
+            <div class="chatlog__message " data-message-id="819398145472593940" id="message-819398145472593940" title="Message sent: 10-Mar-21 09:35 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">haha hai hai</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1c29a628733a05bde2e46180afdf0786-9A3A8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Var&#39;uun#6962" data-user-id="164145797867241472" style="color: rgb(243,238,238)">Var&#39;uun</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 09:54 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="819402936337301515" id="message-819402936337301515" title="Message sent: 10-Mar-21 09:54 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Story_Recap_E2_-_Google_Docs-DEB91.pdf">
+                                        Story_Recap_E2_-_Google_Docs.pdf
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    52.83 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="ShibaHeart">
+                                <img class="emoji emoji--small" alt="ShibaHeart" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/818340879701508107-4BB28.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/93db70e199864c28acd1e2746b9e5b63-E0E7E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Cina#0001" data-user-id="148836229067046914" style="color: rgb(104,98,98)">Cina</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 11:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="819421835384848404" id="message-819421835384848404" title="Message sent: 10-Mar-21 11:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oooo is this your dm</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">10-Mar-21 11:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="819432361233219595" id="message-819432361233219595" title="Message sent: 10-Mar-21 11:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yuup</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/93db70e199864c28acd1e2746b9e5b63-E0E7E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Cina#0001" data-user-id="148836229067046914" style="color: rgb(104,98,98)">Cina</span>
+
+
+        <span class="chatlog__timestamp">11-Mar-21 12:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="819436458913693697" id="message-819436458913693697" title="Message sent: 11-Mar-21 12:07 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oooooo exciting</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819436488013774878" id="message-819436488013774878" title="Message sent: 11-Mar-21 12:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i cant wait to read more</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1c29a628733a05bde2e46180afdf0786-9A3A8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Var&#39;uun#6962" data-user-id="164145797867241472" style="color: rgb(243,238,238)">Var&#39;uun</span>
+
+
+        <span class="chatlog__timestamp">11-Mar-21 05:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="819694648124768276" id="message-819694648124768276" title="Message sent: 11-Mar-21 05:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Im doing my best to get as many of these recaps done as possible. But as the time draws near i will not be able to complete all of them. So.
+Our sunday session will run a bit longer, as the first bit i will quickly recap all that has happened so far.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">11-Mar-21 05:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="819694779259813928" id="message-819694779259813928" title="Message sent: 11-Mar-21 05:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Perfect and I will start posting character introductions here. you are already doing so much so thank you!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819694954640179201" id="message-819694954640179201" title="Message sent: 11-Mar-21 05:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">To start off with let&#39;s let everyone know the world that we are exploring currently. Welcome to Kriios</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="819694992418406400" id="message-819694992418406400" title="Message sent: 11-Mar-21 05:15 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Kriios_1-12181.jpg">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Kriios_1-12181.jpg" alt="Image attachment" title="Image: Kriios_1.jpg (3.52 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819695252214251591" id="message-819695252214251591" title="Message sent: 11-Mar-21 05:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">An island continent with 5 main regions
+
+Grackman hold, being the northernmost one,  home of foul Gillins, terrifying kracken like creatures that can swallow up kingdoms from the cracking ice, and the birthplace of Grackmans. harsh cold bites through your very flesh, but as a Grackman, the cold embraces you like a comforting blanket.
+
+The great frozen river being the next one to follow, less cold, but more of an arctic wasteland, the terrain is mostly flat, except for the odd piece of terrain sticking out, the ground is slippery, as it is mostly made from thick sheets of ice, about a meter below however, the Gillins lie in wait, begging for you to stop for just a moment, so they may take your flesh to the bottom of its home.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819695547723546624" id="message-819695547723546624" title="Message sent: 11-Mar-21 05:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Next up are the Wildlands, a common ground for everyone, lush trees and beautiful lakes surrounded in its four seasons, neither of which are boring. the people here are happy, and quite flush with diversity, from gnomes to high elves, those who managed to hear of this elusive island tend to spend most of their time here, as the northernmost and southern most regions are uninhabitable from commonfolk.
+
+Below that are the Dunes, great deserts of scorching heat, and hunting ground for the Sarraques, gargantuan 100m wide fangworms that eat through the sand with utmost elegance, they prey on bands of adventurers who foolishly decide to make camp for the night, however there are locations within the dunes that are inaccessible to the great Arraques, harder bits of crusted stone, lurching forwards for miles where people decided to take up residence, some areas have their own ecosystem, and serves as a tropical, summerful paradise.
+
+The southernmost region, home to the Balions and scorching heat, is aptly named the Scorchlands. common temperature ranges from 50-60 degrees with highest temperatures recorded at 70. this land is caked with a dry, sandstone surface, cracked and desolate, its land does not bear trees, or even such resembling. the only fuel source around that any Balions holds have for cooking meat, is  the harsh sun, or the ruins, scatterred from an ancient civilization, these ruins contained not many riches, but the most valuable resource of all for them.
+wood, coal, and other burnable substances.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="819695893627797515" id="message-819695893627797515" title="Message sent: 11-Mar-21 05:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Each city has its own supplies and demands, with that, a crate of apples, while only 10g in Kelinan (wildlands) could be worth 100g in a city belonging to the dunes.
+and as such,  some cities may not even have a value for currency, with a minded goal on helping each other survive in their community. However their services are still available to outsiders, but at trade value. 
+
+i.e Crate of apples= nonmagical longsword
+
+None of the regions are particularly at war, as this is an island of peace and tourists, fortunately the residents of this island realized far sooner than the rest of the world that life is far too short for petty squabbles over land and such, and each are quite happy with the land they control. Power hungry leaders and tyrants are often dealt with in a timely manner by their people.
+
+After all. just because 2 Kriians don&#39;t like each other, doesn&#39;t mean they can make others not like each other.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1c29a628733a05bde2e46180afdf0786-9A3A8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Var&#39;uun#6962" data-user-id="164145797867241472" style="color: rgb(243,238,238)">Var&#39;uun</span>
+
+
+        <span class="chatlog__timestamp">12-Mar-21 06:19 AM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="819892347746779157" id="message-819892347746779157" title="Message sent: 12-Mar-21 06:19 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Story_Recap_E3-3689F.pdf">
+                                        Story_Recap_E3.pdf
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    93.21 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="ShibaHeart">
+                                <img class="emoji emoji--small" alt="ShibaHeart" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/818340879701508107-4BB28.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1c29a628733a05bde2e46180afdf0786-9A3A8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Var&#39;uun#6962" data-user-id="164145797867241472" style="color: rgb(243,238,238)">Var&#39;uun</span>
+
+
+        <span class="chatlog__timestamp">12-Mar-21 04:22 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="820044037356126268" id="message-820044037356126268" title="Message sent: 12-Mar-21 04:22 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <div class="chatlog__attachment-generic">
+                                <svg class="chatlog__attachment-generic-icon">
+                                    <use href="#icon-attachment" />
+                                </svg>
+                                <div class="chatlog__attachment-generic-name">
+                                    <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Story_Recap_E3.5_-_Google_Docs-CF75B.pdf">
+                                        Story_Recap_E3.5_-_Google_Docs.pdf
+                                    </a>
+                                </div>
+                                <div class="chatlog__attachment-generic-size">
+                                    51.92 KB
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="ShibaThumb">
+                                <img class="emoji emoji--small" alt="ShibaThumb" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/818345923381428244-A5795.png" loading="lazy">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">13-Mar-21 01:14 AM</span>
+
+            <div class="chatlog__message " data-message-id="820177863466156042" id="message-820177863466156042" title="Message sent: 13-Mar-21 01:14 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>The Cast</strong></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="820178926168440872" id="message-820178926168440872" title="Message sent: 13-Mar-21 01:18 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Zar: eyes hollowed and he has a disease like aura around him, his armor is in tatters, and he refuses to buy different clothes. A green dragonborn who has been to close to the edge of death and back... and it resonates from him in a dark aura and sickly sweet smell
+
+Class: Paladin, Oathbreaker, <s>Oath of Ancients</s> Oath of Rot</span>
+
+                                <span class="chatlog__edited-timestamp" title="13-Mar-21 01:25 AM">(edited)</span>
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Zar_New-EF716.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/Zar_New-EF716.png" alt="Image attachment" title="Image: Zar_New.png (4.42 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="heart_eyes">
+                                <img class="emoji emoji--small" alt="&#128525;" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1f60d-48579.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/a61f94c6ab3847305ffc1686161e57b6-314EC.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Generic Meme#8852" data-user-id="371822364175892481" style="color: rgb(26,188,156)">Generic Meme</span>
+
+
+        <span class="chatlog__timestamp">13-Mar-21 01:25 AM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="820180679940636732" id="message-820180679940636732" title="Message sent: 13-Mar-21 01:25 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Avriel: Hairs a bit longer and wild now, beard is longer. Wearing obviously hand crafted leather armour. His eyes are dark and sunken, slightly hollow. He’s been through a lot and it shows in his eyes and face. 
+
+Class: Armorer Artificer, and Necromancer Wizard</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/image0-93DE9.jpg">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/image0-93DE9.jpg" alt="Image attachment" title="Image: image0.jpg (13.02 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/9bc796e823c074f85168d9975b58cdf7-9FD9C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="jun-iwnl-#2827" data-user-id="185520831953240064" style="color: rgb(155,31,235)">Jun</span>
+
+
+        <span class="chatlog__timestamp">13-Mar-21 11:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="820521316091691028" id="message-820521316091691028" title="Message sent: 13-Mar-21 11:58 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">heres my dnd yasuo homebrew that my dm and i created</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820521376637124649" id="message-820521376637124649" title="Message sent: 13-Mar-21 11:59 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/dndyas_2-38AE2.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/dndyas_2-38AE2.png" alt="Image attachment" title="Image: dndyas_2.png (255.07 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820521671927791646" id="message-820521671927791646" title="Message sent: 14-Mar-21 12:00 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/part2_2-9A847.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/part2_2-9A847.png" alt="Image attachment" title="Image: part2_2.png (192.66 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820521738126622720" id="message-820521738126622720" title="Message sent: 14-Mar-21 12:00 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/2a0f87a6822998ccb8a5d1a9645938a3-B2E8A.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/2a0f87a6822998ccb8a5d1a9645938a3-B2E8A.png" alt="Image attachment" title="Image: 2a0f87a6822998ccb8a5d1a9645938a3.png (2.72 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:00 AM</span>
+
+            <div class="chatlog__message " data-message-id="820521774109556756" id="message-820521774109556756" title="Message sent: 14-Mar-21 12:00 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">haha thats amazing</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="820521787262631946" id="message-820521787262631946" title="Message sent: 14-Mar-21 12:00 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Wait I love this</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/9bc796e823c074f85168d9975b58cdf7-9FD9C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="jun-iwnl-#2827" data-user-id="185520831953240064" style="color: rgb(155,31,235)">Jun</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-21 12:01 AM</span>
+
+            <div class="chatlog__message " data-message-id="820521906876710942" id="message-820521906876710942" title="Message sent: 14-Mar-21 12:01 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">she worked her ass off to adapt it to her campaign lore and league mechanics</span>
+
+                                <span class="chatlog__edited-timestamp" title="14-Mar-21 12:01 AM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/711c35f4a2a08eb20ae5fba56e10866a-309D8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ChuckDuck#6541" data-user-id="251188466673516545" style="">ChuckDuck</span>
+
+
+        <span class="chatlog__timestamp">23-Mar-21 08:36 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="824079297630830623" id="message-824079297630830623" title="Message sent: 23-Mar-21 08:36 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Anton:Half-elf hermit living in the forest for most of his life
+Looks:The picture sums him up perfectly.
+Class:Ranger</span>
+
+                        </div>
+                    </div>
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/d9b45d82b2b87db6cd9a3d967802922b6b98cc19_0-67F29.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/d9b45d82b2b87db6cd9a3d967802922b6b98cc19_0-67F29.png" alt="Image attachment" title="Image: d9b45d82b2b87db6cd9a3d967802922b6b98cc19_00.png (348.01 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <span class="chatlog__reference-unknown">
+                    Original message was deleted or could not be loaded.
+                </span>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">24-Mar-21 04:55 AM</span>
+
+            <div class="chatlog__message " data-message-id="824204767436996609" id="message-824204767436996609" title="Message sent: 24-Mar-21 04:55 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/9a6685fbaa7b39511ec5d54b6b788d27-1AC93.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Jesse-Kom#9862" data-user-id="109880324120432640" style="">Jesse-Kom</span>
+
+
+        <span class="chatlog__timestamp">25-Mar-21 10:28 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="824832160140623883" id="message-824832160140623883" title="Message sent: 25-Mar-21 10:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://thetrove.is/Books/Dungeons%2520%2526%2520Dragons%2520%255Bmulti%255D/5th%2520Edition%2520%25285e%2529/">https://thetrove.is/Books/Dungeons%20%26%20Dragons%20%5Bmulti%5D/5th%20Edition%20%285e%29/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://thetrove.is/Books/Dungeons%20%26%20Dragons%20%5Bmulti%5D/5th%20Edition%20%285e%29/">
+                                                        <div class="markdown preserve-whitespace">The Trove :: Archive</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">A dragon&#39;s hoard of all the tabletop RPGs you need from Dungeons and Dragons, Pathfinder, World of Darkness, to Shadowrun - all available for free to download.</div>
+                                            </div>
+
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/logo-12C2D.png">
+                                                <img class="chatlog__embed-thumbnail" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/logo-12C2D.png" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832243746209852" id="message-824832243746209852" title="Message sent: 25-Mar-21 10:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">The Trove is a website full of RPG books, this is the link to the D&amp;D section... it&#39;s scanned full copies of the paid books</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832295197343786" id="message-824832295197343786" title="Message sent: 25-Mar-21 10:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">of course always buy the books to support the games, but if you can&#39;t at the moment</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832304962338858" id="message-824832304962338858" title="Message sent: 25-Mar-21 10:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">this is a good alternative</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832328370618408" id="message-824832328370618408" title="Message sent: 25-Mar-21 10:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">especially if you&#39;re looking to learn</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832418120859668" id="message-824832418120859668" title="Message sent: 25-Mar-21 10:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">You can go into the <em>CORE</em> section and find the Players Handbook in there along with other core books, there&#39;s some third party books and such as well</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832438403727401" id="message-824832438403727401" title="Message sent: 25-Mar-21 10:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">If this isn&#39;t ok, feel free to delete it</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832589222379542" id="message-824832589222379542" title="Message sent: 25-Mar-21 10:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://dnd.wizards.com/basics-play">https://dnd.wizards.com/basics-play</a></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832664015470612" id="message-824832664015470612" title="Message sent: 25-Mar-21 10:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">This is a link to the Free version of the Rules that Wizards provides if you don&#39;t feel comfortable using the Trove</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="824832720546955316" id="message-824832720546955316" title="Message sent: 25-Mar-21 10:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">it&#39;s got enough info to get you started but doesn&#39;t include everything</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <span class="chatlog__reference-unknown">
+                    Original message was deleted or could not be loaded.
+                </span>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">25-Mar-21 10:33 PM</span>
+
+            <div class="chatlog__message " data-message-id="824833496408522772" id="message-824833496408522772" title="Message sent: 25-Mar-21 10:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Pinned a message.</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 02:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="825791531168170015" id="message-825791531168170015" title="Message sent: 28-Mar-21 02:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="ZarUWU3" title="ZarUWU3" src="https://cdn.discordapp.com/emojis/825767720461008907.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Mar-21 02:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="825791533273186324" id="message-825791533273186324" title="Message sent: 28-Mar-21 02:00 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-FB9A2.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-FB9A2.png" alt="Image attachment" title="Image: emoji.png (15.92 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 02:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="825791563141087263" id="message-825791563141087263" title="Message sent: 28-Mar-21 02:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I LOVE IT</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 02:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="825797666428420096" id="message-825797666428420096" title="Message sent: 28-Mar-21 02:25 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="Zarsly2" title="Zarsly2" src="https://cdn.discordapp.com/emojis/825767721429106688.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Mar-21 02:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="825797667648962610" id="message-825797667648962610" title="Message sent: 28-Mar-21 02:25 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-1235C.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-1235C.png" alt="Image attachment" title="Image: emoji.png (14.17 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 02:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="825797802830594079" id="message-825797802830594079" title="Message sent: 28-Mar-21 02:25 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="ZarShocked2" title="ZarShocked2" src="https://cdn.discordapp.com/emojis/825767722159570984.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Mar-21 02:25 PM</span>
+
+            <div class="chatlog__message " data-message-id="825797804415909948" id="message-825797804415909948" title="Message sent: 28-Mar-21 02:25 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-DBB3E.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-DBB3E.png" alt="Image attachment" title="Image: emoji.png (16.42 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 02:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="825797916395700254" id="message-825797916395700254" title="Message sent: 28-Mar-21 02:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="ZarHappy2" title="ZarHappy2" src="https://cdn.discordapp.com/emojis/825767721869639680.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Mar-21 02:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="825797917583474688" id="message-825797917583474688" title="Message sent: 28-Mar-21 02:26 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-0162A.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-0162A.png" alt="Image attachment" title="Image: emoji.png (16.59 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 02:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="825798068514324571" id="message-825798068514324571" title="Message sent: 28-Mar-21 02:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="ZarDissapointed2" title="ZarDissapointed2" src="https://cdn.discordapp.com/emojis/825767720452358194.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Mar-21 02:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="825798069995569232" id="message-825798069995569232" title="Message sent: 28-Mar-21 02:26 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-0638B.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-0638B.png" alt="Image attachment" title="Image: emoji.png (17.33 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/72a7f1d9b1c2eb684476faae04d19406-813EA.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="tessa#8512" data-user-id="217730356210565130" style="color: rgb(228,26,26)">tess</span>
+
+
+        <span class="chatlog__timestamp">28-Mar-21 10:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="825916046643953664" id="message-825916046643953664" title="Message sent: 28-Mar-21 10:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="ShibaSad" title="ShibaSad" src="https://cdn.discordapp.com/emojis/818340894340153375.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">28-Mar-21 10:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="825916047994388480" id="message-825916047994388480" title="Message sent: 28-Mar-21 10:15 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-7DE54.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-7DE54.png" alt="Image attachment" title="Image: emoji.png (17.54 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1c29a628733a05bde2e46180afdf0786-9A3A8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Var&#39;uun#6962" data-user-id="164145797867241472" style="color: rgb(243,238,238)">Var&#39;uun</span>
+
+
+        <span class="chatlog__timestamp">29-Mar-21 07:53 AM</span>
+
+            <div class="chatlog__message " data-message-id="826061621130166314" id="message-826061621130166314" title="Message sent: 29-Mar-21 07:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="AntonHappy" title="AntonHappy" src="https://cdn.discordapp.com/emojis/825767721895329843.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/711c35f4a2a08eb20ae5fba56e10866a-309D8.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ChuckDuck#6541" data-user-id="251188466673516545" style="">ChuckDuck</span>
+
+
+        <span class="chatlog__timestamp">29-Mar-21 09:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="826081482991992872" id="message-826081482991992872" title="Message sent: 29-Mar-21 09:12 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="Antonuwu2" title="Antonuwu2" src="https://cdn.discordapp.com/emojis/825767721928097822.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/1d72c11b9c5e054a0db2ab1b49f02a4e-6110E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Inc☘n#1499" data-user-id="783354322649481256" style="">Inc☘n</span>
+
+
+        <span class="chatlog__timestamp">13-Apr-21 11:38 AM</span>
+
+            <div class="chatlog__message " data-message-id="831554019327082536" id="message-831554019327082536" title="Message sent: 13-Apr-21 11:38 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;emoji <img loading="lazy" class="emoji " alt="kekker1Heart" title="kekker1Heart" src="https://cdn.discordapp.com/emojis/824492806700531753.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/29df96a7cef32a092f2e2b3e501d1763-6A6A5.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Toasty#7934" data-user-id="208946659361554432" style="color: rgb(149,165,166)">Toasty</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">13-Apr-21 11:38 AM</span>
+
+            <div class="chatlog__message " data-message-id="831554020422058005" id="message-831554020422058005" title="Message sent: 13-Apr-21 11:38 AM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-2157C.png">
+                                <img class="chatlog__attachment-media" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/emoji-2157C.png" alt="Image attachment" title="Image: emoji.png (14.37 KB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/9a6685fbaa7b39511ec5d54b6b788d27-1AC93.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Jesse-Kom#9862" data-user-id="109880324120432640" style="">Jesse-Kom</span>
+
+
+        <span class="chatlog__timestamp">16-Apr-21 11:59 AM</span>
+
+            <div class="chatlog__message " data-message-id="832646288167927818" id="message-832646288167927818" title="Message sent: 16-Apr-21 11:59 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://store.steampowered.com/app/720620/TaleSpire/">https://store.steampowered.com/app/720620/TaleSpire/</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://store.steampowered.com/app/720620/TaleSpire/">
+                                                        <div class="markdown preserve-whitespace">TaleSpire</div>
+                                                    </a>
+                                            </div>
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">Overview / What Is TaleSpire?TaleSpire is a beautiful way to play pen and paper RPGs online. Bring your stories to life and embark upon campaigns together with your friends, regardless of where you are in the world.With Talespire, the beauty and physicality of tabletop gaming meet the endless possibilities of a digital world. Here you can collab...</div>
+                                            </div>
+
+                                            <div class="chatlog__embed-fields">
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Price</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">$24.99</div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="chatlog__embed-field chatlog__embed-field--inline">
+                                                            <div class="chatlog__embed-field-name">
+                                                                <div class="markdown preserve-whitespace">Recommendations</div>
+                                                            </div>
+
+                                                            <div class="chatlog__embed-field-value">
+                                                                <div class="markdown preserve-whitespace">108</div>
+                                                            </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+
+                                        <div class="chatlog__embed-thumbnail-container">
+                                            <a class="chatlog__embed-thumbnail-link" href="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/header-4C362.jpg">
+                                                <img class="chatlog__embed-thumbnail" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/header-4C362.jpg" alt="Thumbnail" loading="lazy">
+                                            </a>
+                                        </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="832646309260296202" id="message-832646309260296202" title="Message sent: 16-Apr-21 11:59 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Did ya&#39;ll see this?</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="832646337354399785" id="message-832646337354399785" title="Message sent: 16-Apr-21 11:59 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It looks insane</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/ce2b28d8c72adb050f96847ce4b9127f-8E70F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Giru#3205" data-user-id="385234006888939531" style="color: rgb(52,152,219)">Yuta</span>
+
+
+        <span class="chatlog__timestamp">22-Jun-21 08:34 PM</span>
+
+            <div class="chatlog__message " data-message-id="857056033258995722" id="message-857056033258995722" title="Message sent: 22-Jun-21 08:34 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://www.youtube.com/watch?v=YDamisypIi0">https://www.youtube.com/watch?v=YDamisypIi0</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(255,0,0,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+                                            <div class="chatlog__embed-author">
+
+                                                    <span class="chatlog__embed-author-name">
+                                                            <a class="chatlog__embed-author-name-link" href="https://www.youtube.com/channel/UCKy1dAqELo0zrOtPkf0eTMw">IGN</a>
+                                                    </span>
+                                            </div>
+
+                                            <div class="chatlog__embed-title">
+                                                    <a class="chatlog__embed-title-link" href="https://www.youtube.com/watch?v=YDamisypIi0">
+                                                        <div class="markdown preserve-whitespace">D&amp;D: Dark Alliance – Gameplay Explainer Trailer</div>
+                                                    </a>
+                                            </div>
+
+                                        <div class="chatlog__embed-youtube-container">
+                                            <iframe class="chatlog__embed-youtube" src="https://www.youtube.com/embed/YDamisypIi0" width="400" height="225"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="HYPERS">
+                                <img class="emoji emoji--small" alt="HYPERS" src="The%20Ryokan%20-%20%E2%95%90%E2%95%90%20%F0%9D%98%8A%F0%9D%98%B0%F0%9D%98%AE%F0%9D%98%AE%F0%9D%98%B6%F0%9D%98%AF%F0%9D%98%AA%F0%9D%98%B5%F0%9D%98%BA%20-%20%E6%B8%A9%E6%B3%89%20%E2%95%90%E2%95%90%20-%20%F0%9F%90%B2dungeons-dragons%20%5B818052462740635658%5D.html_Files/766911891053215754-72359.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 70 message(s)</div>
+</div>
+
+</body>
+
+</html>
